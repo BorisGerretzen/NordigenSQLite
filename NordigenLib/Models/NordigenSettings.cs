@@ -1,4 +1,4 @@
-﻿namespace NordigenLib;
+﻿namespace NordigenLib.Models;
 
 public class NordigenSettings {
     /// <summary>
@@ -15,6 +15,11 @@ public class NordigenSettings {
     /// Nordigen account ID.
     /// </summary>
     public required string AccountNumber { get; set; }
+
+    /// <summary>
+    /// Number of minutes to wait between each transaction retrieval
+    /// </summary>
+    public required int TimeOutMinutes { get; set; } = 60;
 
     /// <summary>
     /// Base url to the nordigen api. No trailing / required.

@@ -1,7 +1,8 @@
 using System.Text.Json;
-using Microsoft.Extensions.Caching.Memory;
 using NordigenLib;
+using NordigenLib.Models;
 using NordigenService;
+using NordigenService.EntityFramework;
 
 IHost host = Host
     .CreateDefaultBuilder(args)
@@ -11,8 +12,7 @@ IHost host = Host
         NordigenSettings? options = config.GetSection("Nordigen").Get<NordigenSettings>();
         if (options == null) throw new JsonException("Invalid appsettings.json.");
         services.AddSingleton(options);
-
-        services.AddSingleton<MemoryCache>();
+        services.AddDbContext<TransactionsContext>();
         services.AddSingleton<NordigenClient>();
         services.AddHttpClient<NordigenClient>(client => client.BaseAddress = new Uri(options.BaseUrl, UriKind.Absolute));
         services.AddHostedService<Worker>();

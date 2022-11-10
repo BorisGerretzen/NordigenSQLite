@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace NordigenLib.Models;
+namespace NordigenLib.Models.API;
 
 [JsonObject]
 public class Transactions {

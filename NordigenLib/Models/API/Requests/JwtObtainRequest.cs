@@ -1,4 +1,4 @@
-﻿namespace NordigenLib.Requests;
+﻿namespace NordigenLib.Models.API.Requests;
 
 public class JwtObtainRequest {
     public required string SecretId { get; set; }

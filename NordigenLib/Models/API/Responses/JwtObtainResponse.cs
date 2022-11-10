@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace NordigenLib.Responses;
+namespace NordigenLib.Models.API.Responses;
 
 [JsonObject]
 public class JwtObtainResponse {

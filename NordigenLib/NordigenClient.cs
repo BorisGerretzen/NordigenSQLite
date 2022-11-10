@@ -2,8 +2,9 @@
 using System.Runtime.Serialization;
 using System.Web;
 using Newtonsoft.Json;
-using NordigenLib.Requests;
-using NordigenLib.Responses;
+using NordigenLib.Models;
+using NordigenLib.Models.API.Requests;
+using NordigenLib.Models.API.Responses;
 
 namespace NordigenLib;
 
