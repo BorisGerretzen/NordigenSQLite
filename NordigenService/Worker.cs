@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using NordigenLib;
+using NordigenLib.Models;
 using NordigenLib.Models.API.Responses;
 using NordigenService.EntityFramework;
 
@@ -9,11 +10,13 @@ public class Worker : BackgroundService {
     private readonly NordigenClient _client;
     private readonly ILogger<Worker> _logger;
     private readonly IServiceScopeFactory _scopeFactory;
+    private readonly NordigenSettings _settings;
 
-    public Worker(ILogger<Worker> logger, NordigenClient client, IServiceScopeFactory scopeFactory) {
+    public Worker(ILogger<Worker> logger, NordigenClient client, IServiceScopeFactory scopeFactory, NordigenSettings settings) {
         _logger = logger;
         _client = client;
         _scopeFactory = scopeFactory;
+        _settings = settings;
     }
 
     public override Task StartAsync(CancellationToken cancellationToken) {
@@ -38,16 +41,19 @@ public class Worker : BackgroundService {
                     jwtObtainResponse = await UpdateJwt();
                 }
 
+                _logger.LogInformation($"JWT has {(int)Math.Round((jwtObtainResponse.AccessExpiresDateTime - DateTime.Now).TotalHours)} hours left.");
+
+                // Get transactions
                 var transactions = await GatherTransactions(jwtObtainResponse.AccessToken);
 
-                // Get transactions that dont exist already
+                // Filter transactions already in DB
                 using IServiceScope scope = _scopeFactory.CreateScope();
                 var context = scope.ServiceProvider.GetRequiredService<TransactionsContext>();
                 var newTransactions = transactions.Transactions.Booked.Where(trans =>
                     !context.Transactions.Any(trans2 => trans2.TransactionId == trans.TransactionId)).ToList();
                 _logger.LogInformation($"{newTransactions.Count} new transactions found.");
 
-                // Save to EF
+                // Save EF
                 await context.AddRangeAsync(newTransactions, stoppingToken);
                 await context.SaveChangesAsync(stoppingToken);
             }
@@ -61,7 +67,7 @@ public class Worker : BackgroundService {
     }
 
     private async Task Wait(CancellationToken stoppingToken) {
-        await Task.Delay(60 * 1000, stoppingToken);
+        await Task.Delay(_settings.TimeOutMinutes * 60 * 1000, stoppingToken);
     }
 
     private async Task<JwtObtainResponse> UpdateJwt() {
@@ -70,7 +76,7 @@ public class Worker : BackgroundService {
     }
 
     private async Task<TransactionsResponse> GatherTransactions(string token) {
-        _logger.LogInformation("Gathering transactions.");
+        _logger.LogTrace("Gathering transactions.");
         var transactions = await _client.GetTransactions(token);
         _logger.LogInformation($"Received {transactions.Transactions.Booked.Count} transactions.");
         return transactions;
