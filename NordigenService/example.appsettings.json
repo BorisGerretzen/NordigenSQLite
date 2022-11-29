@@ -1,13 +1,22 @@
 {
   "Logging": {
     "LogLevel": {
-      "Default": "Information",
-      "Microsoft.Hosting.Lifetime": "Information"
+      "Default": "Debug",
+      "Microsoft.Hosting.Lifetime": "Debug"
+    },
+    "EventLog": {
+      "LogLevel": {
+        "Default": "Information"
+      }
     }
   },
+  "NordigenApi": {
+    "SecretId": "",
+    "SecretKey": ""
+  },
   "Nordigen": {
-    "SecretId": "Your secret ID",
-    "SecretKey": "Your secret key",
-    "AccountNumber": "Your account number"
+    "AccountNumber": "",
+    "RetrievalMode": "Dynamic",
+    "TimeoutMinutes": 1
   }
 }

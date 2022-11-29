@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NordigenLib.Models.API;
 
 namespace NordigenService.EntityFramework;
 
@@ -10,9 +9,7 @@ public class TransactionsContext : DbContext {
         DbPath = Path.Join(path, "nordigen.db");
     }
 
-    public required DbSet<Transaction> Transactions { get; set; }
-    public required DbSet<CreditorAccount> CreditorAccounts { get; set; }
-    public required DbSet<TransactionAmount> TransactionAmounts { get; set; }
+    public required DbSet<TransactionEntity> Transactions { get; set; }
 
     public string DbPath { get; set; }
 

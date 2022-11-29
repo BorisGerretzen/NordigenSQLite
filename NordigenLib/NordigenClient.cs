@@ -59,7 +59,6 @@ public class NordigenClient {
 
         if (_settings.DateTo.HasValue) {
             query["date_to"] = _settings.DateTo.Value.ToString("yy-MM-dd");
-            ;
         }
 
         var url = _settings.UrlGetTransactions.Replace(":id", _settings.AccountNumber);
