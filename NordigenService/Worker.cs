@@ -37,7 +37,7 @@ public class Worker : BackgroundService {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
 
                 var transactionsFilter = GetAccountTransactionsFilter(_settings.RetrievalMode);
-                _lastRetrieval = DateTime.Now;
+                _lastRetrieval = DateTime.UtcNow;
 
                 var dateFrom = transactionsFilter.DateFrom.HasValue ? transactionsFilter.DateFrom.Value.ToString("G") : "-";
                 var dateTo = transactionsFilter.DateTo.HasValue ? transactionsFilter.DateTo.Value.ToString("G") : "-";

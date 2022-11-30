@@ -54,6 +54,7 @@ var host = Host
         services.RemoveAll<IHttpMessageHandlerBuilderFilter>();
         services.AddHostedService<Worker>();
     })
+    .UseWindowsService()
     .Build();
 
 host.Run();
