@@ -6,6 +6,22 @@
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development"
       }
+    },
+    "Install": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "commandLineArgs": "--install",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "Uninstall": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "commandLineArgs": "--uninstall",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
     }
   }
 }

@@ -4,9 +4,11 @@ namespace NordigenService.EntityFramework;
 
 public class TransactionsContext : DbContext {
     public TransactionsContext() {
-        var folder = Environment.SpecialFolder.LocalApplicationData;
+        const Environment.SpecialFolder folder = Environment.SpecialFolder.ProgramFiles;
         var path = Environment.GetFolderPath(folder);
-        DbPath = Path.Join(path, "nordigen.db");
+        var folderPath = Path.Join(path, "NordigenService");
+        Directory.CreateDirectory(folderPath);
+        DbPath = Path.Join(folderPath, "nordigen.db");
     }
 
     public required DbSet<TransactionEntity> Transactions { get; set; }

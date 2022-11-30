@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Nordigen.Net;
 using Nordigen.Net.Queries;
 using Nordigen.Net.Responses;
-using NordigenLib.Models;
 using NordigenService.EntityFramework;
 
 namespace NordigenService;

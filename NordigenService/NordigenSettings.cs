@@ -1,4 +1,4 @@
-﻿namespace NordigenLib.Models;
+﻿namespace NordigenService;
 
 public class NordigenSettings {
     public enum RetrievalOptions {
