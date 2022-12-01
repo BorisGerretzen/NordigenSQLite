@@ -6,7 +6,7 @@ public class TransactionEntity {
     public TransactionEntity(string? transactionId,
         string endToEndId,
         DateTime bookingDate,
-        decimal amount,
+        string amount,
         string? currency,
         string remittanceInformationUnstructured, string? creditorName, string? creditorIban, string? creditorBban, string? debtorName, string? debtorIban, string? debtorBban) {
         TransactionId = transactionId;
@@ -36,7 +36,7 @@ public class TransactionEntity {
     public string? DebtorIban { get; private set; }
     public string? DebtorBban { get; private set; }
 
-    public decimal Amount { get; private set; }
+    public string Amount { get; private set; }
     public string? Currency { get; private set; }
     public string? RemittanceInformationUnstructured { get; private set; }
 }
