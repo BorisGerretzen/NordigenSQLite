@@ -1,4 +1,6 @@
 # NordigenSQLite
+[![.NET Core Desktop](https://github.com/BorisGerretzen/NordigenSQLite/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/BorisGerretzen/NordigenSQLite/actions/workflows/dotnet-desktop.yml)
+
 Application to load transactions from the Nordigen API into a SQLite database.
 
 ## Todo
